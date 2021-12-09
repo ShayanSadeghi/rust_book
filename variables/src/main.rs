@@ -11,4 +11,19 @@ fn main() {
         "The value of THREE_HOURS_IN_SECONS is {}",
         THREE_HOURS_IN_SECONS
     );
+    //shadowing:
+    let y = 2;
+    println!("The value of y is {}", y);
+    let y = y + 1;
+    println!("The value of y is {}", y);
+    {
+        let y = y * 2;
+        println!("The value of y is {}", y);
+    }
+    println!("The value of y is {}", y);
+
+    //type changing is not possible for mutable variables, we do this by shadowing
+    let spaces = "      ";
+    let spaces = spaces.len();
+    println!("The spaces value is {}", spaces)
 }
