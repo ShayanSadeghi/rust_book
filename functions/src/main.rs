@@ -1,9 +1,9 @@
 fn main() {
     println!("Hello, world!");
 
-    another_function();
+    time_message(5, 'h');
 }
 
-fn another_function() {
-    println!("It is another function");
+fn time_message(x: i32, label: char) {
+    println!("The time is {}{}", x, label);
 }
