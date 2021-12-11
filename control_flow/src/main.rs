@@ -48,9 +48,21 @@ fn main() {
    };
    println!("result is {}", result);
 
+   //while
    let mut x = 3;
    while x != 0 {
       println!("{}", x);
       x -= 1;
    }
+
+   //for
+   let arr = [1, 3, 5, 6, 10];
+   for a in arr {
+      println!("value in array: {}", a);
+   }
+
+   for number in (1..4).rev() {
+      println!("{}!", number);
+   }
+   println!("Run!")
 }
