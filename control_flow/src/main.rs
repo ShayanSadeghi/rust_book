@@ -38,4 +38,19 @@ fn main() {
       count += 1;
    }
    println!("End count = {}", count);
+
+   let mut counter = 0;
+   let result = loop {
+      counter += 1;
+      if counter == 10 {
+         break counter * 2; //returned value from loop
+      }
+   };
+   println!("result is {}", result);
+
+   let mut x = 3;
+   while x != 0 {
+      println!("{}", x);
+      x -= 1;
+   }
 }
