@@ -22,4 +22,18 @@ fn main() {
     //if we want to has both variables available, we can use clone()
     let s3 = s2.clone();
     println!("s2:{} , s3: {}", s2, s3);
+
+    take_ownership(s3); // s3 is no more available after passing it to this function
+
+    let s2 = take_and_give_ownership(s2);
+    println!("s2 value after passing and returning in a function: {}", s2);
+}
+
+fn take_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn take_and_give_ownership(some_string: String) -> String {
+    println!("This function give back the ownership...");
+    some_string // returning expression
 }
