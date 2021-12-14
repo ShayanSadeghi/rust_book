@@ -1,11 +1,7 @@
 fn main() {
     let mut s1 = String::from("Hello"); //define a mutable variable
-
-    change(&mut s1); // borrow the value and mutation access
-    println!("s1 value after change is {}", s1);
-}
-
-fn change(s: &mut String) {
-    // accept and string which has allowed to mutate
-    s.push_str(", world!")
+    let r1 = &s1; //we can have multiple immutable referencing
+    let r2 = &s1;
+    // after immutable references we can't define a new mutable reference
+    println!("values are {}, {}", r1, r2);
 }
