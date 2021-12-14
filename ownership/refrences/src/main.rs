@@ -1,10 +1,11 @@
 fn main() {
-    let s1 = String::from("Hello, world!");
+    let mut s1 = String::from("Hello"); //define a mutable variable
 
-    let len = len_calc(&s1); // "&" used for referencing to s1 (pointer concept), we borrow s1 to "len_calc" function
-    println!("The length of s1 is {}", { len });
+    change(&mut s1); // borrow the value and mutation access
+    println!("s1 value after change is {}", s1);
 }
 
-fn len_calc(s: &String) -> usize {
-    s.len()
+fn change(s: &mut String) {
+    // accept and string which has allowed to mutate
+    s.push_str(", world!")
 }
