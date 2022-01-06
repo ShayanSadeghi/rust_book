@@ -10,6 +10,12 @@ impl Rectangle {
     }
 }
 
+impl Rectangle {
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+}
+
 fn main() {
     let rect1 = Rectangle {
         width: 10,
@@ -20,4 +26,7 @@ fn main() {
         "The area of the rectangle is {} square pixels",
         rect1.area()
     );
+
+    println!("The width of the rectangle is {} pixels", rect1.width);
+    println!("The width is greater than zero? {}", rect1.width());
 }
