@@ -46,7 +46,7 @@ fn main() {
     match dice_roll {
         3 => add_fancy_hat(),
         7 => remove_fancy_hat(),
-        _ => reroll(), // _ don't bind value
+        _ => (), // _ don't bind value and () do nothing in this situations
     }
 }
 
@@ -56,10 +56,6 @@ fn add_fancy_hat() {
 
 fn remove_fancy_hat() {
     println!("remove fancy hat");
-}
-
-fn reroll() {
-    println!("roll again!");
 }
 
 fn plus_one(x: Option<i32>) -> Option<i32> {
