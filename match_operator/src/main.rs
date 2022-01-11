@@ -36,4 +36,21 @@ fn value_in_cents(coin: Coin) -> u8 {
 
 fn main() {
     value_in_cents(Coin::Quarter(UsState::Florida));
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => {
+            println!("Noting done and reture None");
+            None
+        }
+        Some(i) => {
+            println!("Adding one to the value");
+            Some(i + 1)
+        }
+    }
 }
