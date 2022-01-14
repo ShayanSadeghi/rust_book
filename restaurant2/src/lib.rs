@@ -13,3 +13,18 @@ pub fn eat_at_restaurant() {
     // Relative path
     front_of_house::hosting::add_to_waitlist();
 }
+
+//----------------------------------
+// "super" in module path is something like ".." in filesystem path
+
+fn serve_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::serve_order(); // to have access to the outer functions, we use "super" keyword
+                              // the outer materials are accessible by inner ones. so there is no need to use "pub" for "serve_order" function
+    }
+
+    fn cook_order() {}
+}
