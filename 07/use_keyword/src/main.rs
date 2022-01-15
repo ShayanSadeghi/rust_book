@@ -1,10 +1,12 @@
-// use std::io::Result as IoResult
-// mod lib;
-use std::io::{self, Write}
-// the above use, import: std::io and std::io::Write
+mod front_of_house; // using ";" instead of code block, tells Rust to search and import code in "front_of_house.rs"
 
+pub use crate::front_of_house::hosting; //"hosting" is now a valid name in root scope
+                                        // "pub use" re-export the module. each module import th lib, has access to hosting too.
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist()
+}
 
 fn main() {
-    // lib::eat_at_restaurant();
-    // lib::hosting::add_to_waitlist(); // it is because of re-exporting
+    eat_at_restaurant();
 }
