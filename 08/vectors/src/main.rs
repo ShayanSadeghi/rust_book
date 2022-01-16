@@ -35,4 +35,17 @@ fn main() {
         *val += 10;
     }
     println!("{:#?}", v_5);
+
+    //if we know all types of our elements, we can use enums to create vectors with multi-type values
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(25),
+        SpreadsheetCell::Text(String::from("Shayan")),
+        SpreadsheetCell::Float(7.5),
+    ];
 }
