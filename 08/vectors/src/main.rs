@@ -28,5 +28,11 @@ fn main() {
     // the next to lines cause an error together,
     let first = &v_4[0];
     // v_4.push(6);
-    println!("The first element is {}", first)
+    println!("The first element is {}", first);
+
+    let mut v_5 = vec![10, 20, 30];
+    for val in &mut v_5 {
+        *val += 10;
+    }
+    println!("{:#?}", v_5);
 }
