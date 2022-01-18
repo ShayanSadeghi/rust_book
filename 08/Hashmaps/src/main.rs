@@ -54,4 +54,24 @@ fn main() {
     for (k, v) in &scores {
         println!("{}\t{}", k, v);
     }
+
+    //updating values in Hashmap
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 20); // updating 'Blue'
+
+    // set a default value if the "Key" doesn't exist in Hashmap
+    scores.entry(String::from("Yellow")).or_insert(50); // because there is no "Yellow" key in our Hashmap, it create a new and the value will be 50
+    scores.entry(String::from("Blue")).or_insert(50); // because we have "Blue" in our HashMap keys
+
+    // a very good example
+    let text = "Hello world , Rust is a very good lang in the world";
+    let mut text_map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = text_map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:#?}", text_map);
 }
