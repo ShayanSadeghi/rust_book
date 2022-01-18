@@ -49,4 +49,9 @@ fn main() {
     } else {
         println!("Wrong key");
     }
+
+    // iterating over Hashmap
+    for (k, v) in &scores {
+        println!("{}\t{}", k, v);
+    }
 }
