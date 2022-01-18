@@ -28,4 +28,25 @@ fn main() {
     m2.insert(field_name_2, field_value_2); // int will be copied, so we can use it later
     println!("{:#?}", m2);
     println!("{}", field_value_2);
+
+    //Access values in HashMap
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+    if let Some(s) = score {
+        println!("{}", s);
+    } else {
+        println!("Wrong key");
+    }
+
+    let team_name_2 = String::from("Red");
+    let score_2 = scores.get(&team_name_2);
+    if let Some(s) = score_2 {
+        println!("{}", s);
+    } else {
+        println!("Wrong key");
+    }
 }
