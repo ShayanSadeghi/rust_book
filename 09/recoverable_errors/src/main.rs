@@ -22,7 +22,7 @@ fn main() {
     // check unwrap and except to do this things in a more concise way
 
     // propagating error
-    let user_name = read_username_from_file();
+    let user_name = read_username_from_file_concise();
     println!("{:?}", user_name)
 }
 
@@ -40,4 +40,11 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Ok(_) => Ok(s),
         Err(e) => Err(e),
     }
+}
+
+fn read_username_from_file_concise() -> Result<String, io::Error> {
+    let mut f = File::open("my_data.txt")?; // it there is an error, rust make an early error return.
+    let mut s = String::new();
+    f.read_to_string(&mut s)?; //check for any error again
+    Ok(s) // returning value if everything goes well
 }
