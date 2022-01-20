@@ -1,5 +1,7 @@
+// section 9.2
 use std::fs::File;
 use std::io::ErrorKind;
+use std::io::{self, Read};
 
 fn main() {
     let f = File::open("test.txt"); // if file doesn't exist, there is no default panic. it is a recoverable error
@@ -18,4 +20,24 @@ fn main() {
         },
     };
     // check unwrap and except to do this things in a more concise way
+
+    // propagating error
+    let user_name = read_username_from_file();
+    println!("{:?}", user_name)
+}
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("my_data.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e), // early error return
+    };
+
+    let mut s = String::new();
+    match f.read_to_string(&mut s) {
+        // we do not need using return keyword, because this is last expression
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
 }
