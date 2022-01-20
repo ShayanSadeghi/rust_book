@@ -23,7 +23,13 @@ fn main() {
 
     // propagating error
     let user_name = read_username_from_file_chaining();
-    println!("{:?}", user_name)
+    println!("{:?}", user_name);
+    let name = "Shayan";
+    let c = last_char_of_first_line(&name);
+    match c {
+        Some(val) => println!("Last char of {} is {:?}", name, val),
+        None => println!("Something goes wrong"),
+    }
 }
 
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -53,4 +59,8 @@ fn read_username_from_file_chaining() -> Result<String, io::Error> {
     let mut s = String::new();
     File::open("my_data.txt")?.read_to_string(&mut s)?; // chaining
     Ok(s)
+}
+
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last() // the ? operator return None or Some in this code
 }
