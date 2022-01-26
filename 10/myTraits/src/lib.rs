@@ -3,9 +3,12 @@
 pub trait Summary {
     //traits are like interfaces in C++
     // default implementation
+    // call other trait is possible only in the same trait, during a default implementation
     fn summarize(&self) -> String {
-        String::from("(Read more...)")
+        format!("(Read more from {}...)", self.summarize_author())
     }
+    // it is not important that the called trait has a default implementation or not
+    fn summarize_author(&self) -> String;
 }
 
 pub struct BlogPost {
@@ -15,7 +18,11 @@ pub struct BlogPost {
     pub content: String,
 }
 
-impl Summary for BlogPost {} // nothing to implement, so rust use default implementation on Summary trait
+impl Summary for BlogPost {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.author)
+    }
+}
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,
@@ -25,6 +32,9 @@ pub struct NewsArticle {
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
         format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.author)
     }
 }
 
@@ -36,7 +46,7 @@ pub struct Tweet {
 }
 
 impl Summary for Tweet {
-    fn summarize(&self) -> String {
-        format!("{}: {}", self.username, self.content)
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
     }
 }
