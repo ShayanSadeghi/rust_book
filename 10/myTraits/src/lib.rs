@@ -2,9 +2,20 @@
 
 pub trait Summary {
     //traits are like interfaces in C++
-    fn summarize(&self) -> String;
+    // default implementation
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")
+    }
 }
 
+pub struct BlogPost {
+    pub title: String,
+    pub date: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for BlogPost {} // nothing to implement, so rust use default implementation on Summary trait
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,

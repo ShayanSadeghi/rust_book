@@ -1,5 +1,5 @@
 // section 10.2
-use myTraits::{Summary, Tweet}; //we should import Summary too
+use myTraits::{BlogPost, Summary, Tweet}; //we should import Summary too
 fn main() {
     let my_tweet = Tweet {
         username: String::from("some_un"),
@@ -7,5 +7,13 @@ fn main() {
         reply: false,
         retweet: false,
     };
-    print!("1 new tweet: {}", my_tweet.summarize())
+    print!("1 new tweet: {}", my_tweet.summarize());
+
+    let new_post = BlogPost {
+        title: String::from("It is my first blog post"),
+        date: String::from("2022-01-26"),
+        author: String::from("Shayan"),
+        content: String::from("hey it is time to learn rust"),
+    };
+    print!("New post {}", new_post.summarize());
 }
