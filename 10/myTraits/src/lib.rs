@@ -50,3 +50,7 @@ impl Summary for Tweet {
         format!("@{}", self.username)
     }
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Notifications {}", item.summarize()); //we can call summarize because item type is Summary
+}

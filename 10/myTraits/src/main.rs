@@ -7,7 +7,7 @@ fn main() {
         reply: false,
         retweet: false,
     };
-    print!("1 new tweet: {}", my_tweet.summarize());
+    println!("1 new tweet: {}", my_tweet.summarize());
 
     let new_post = BlogPost {
         title: String::from("It is my first blog post"),
@@ -15,5 +15,5 @@ fn main() {
         author: String::from("Shayan"),
         content: String::from("hey it is time to learn rust"),
     };
-    print!("New post {}", new_post.summarize());
+    println!("New post {}", new_post.summarize());
 }
