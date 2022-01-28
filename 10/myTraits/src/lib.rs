@@ -54,3 +54,13 @@ impl Summary for Tweet {
 pub fn notify(item: &impl Summary) {
     println!("Notifications {}", item.summarize()); //we can call summarize because item type is Summary
 }
+
+fn returns_summarizable() -> impl Summary {
+    // we should return only one type (ex. both Tweet and BlogPost are not possible)
+    Tweet {
+        username: String::from("Shayan"),
+        content: String::from("I do my fuzzy project these days :)"),
+        reply: false,
+        retweet: false,
+    }
+}
