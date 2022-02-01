@@ -1,7 +1,8 @@
 // section 10.1
 
 // "largest" is a "generic" over some type "T".
-fn largest<T>(list: &[T]) -> T {
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    // char and i32 implement the PartialOrd and Copy, PartialOrd used to enables comparison
     let mut largest = list[0];
     for &item in list {
         if item > largest {
@@ -17,18 +18,18 @@ struct Point<T, U> {
     y: U,
 }
 
-struct Point_2<T> {
+struct Point2<T> {
     x: T,
     y: T,
 }
-impl<T> Point_2<T> {
+impl<T> Point2<T> {
     fn x(&self) -> &T {
         &self.x
     }
 }
 
-// only for Point_2 which has f32 type
-impl Point_2<f32> {
+// only for Point2 which has f32 type
+impl Point2<f32> {
     fn distance_from_origin(&self) -> f32 {
         (self.x.powi(2) + self.y.powi(2)).sqrt()
     }
@@ -56,6 +57,6 @@ fn main() {
     let both_integer = Point { x: 5, y: 10 }; // in this situation we can use only one generic
     let both_integer = Point { x: 5, y: 10.0 }; // in this situation we need both generic types
 
-    let p2 = Point_2 { x: 1, y: 4 };
+    let p2 = Point2 { x: 1, y: 4 };
     println!("p.x = {}", p2.x());
 }
