@@ -1,5 +1,7 @@
 // section 10.1
 
+use std::fmt::Display;
+
 // "largest" is a "generic" over some type "T".
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     // char and i32 implement the PartialOrd and Copy, PartialOrd used to enables comparison
@@ -41,6 +43,27 @@ impl<T, U> Point<T, U> {
         Point {
             x: self.x,  // generic type U
             y: other.y, //generic type N
+        }
+    }
+}
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest number is x = {}", self.x);
+        } else {
+            println!("The largest number is y = {}", self.y);
         }
     }
 }
