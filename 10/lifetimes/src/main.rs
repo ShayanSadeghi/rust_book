@@ -1,3 +1,7 @@
+struct ImportantEx<'a> {
+    part: &'a str,
+}
+
 fn main() {
     let string1 = String::from("abcd");
     {
@@ -11,7 +15,13 @@ fn main() {
     }
 
     let dum = dummy_func("hi", "hello");
-    println!("dummy variable is {}", dum)
+    println!("dummy variable is {}", dum);
+
+    let novel = String::from("It is a test string. it is another sentence...");
+    let first_sentence = novel.split('.').next().expect("could not find a '.'");
+    let x = ImportantEx {
+        part: first_sentence,
+    };
 }
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
