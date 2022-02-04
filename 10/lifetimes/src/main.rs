@@ -9,6 +9,9 @@ fn main() {
         // shorter lifetime of string1 and string 2
         println!("The longest string is \"{}\"", result);
     }
+
+    let dum = dummy_func("hi", "hello");
+    println!("dummy variable is {}", dum)
 }
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -20,4 +23,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     } else {
         y
     }
+}
+
+fn dummy_func<'a>(x: &'a str, y: &str) -> &'a str {
+    println!("second parameter is: {}", y);
+    // a dummy function like "longest" but only return the first parameter passed to it,
+    // notice we only use lifetime "'a" for x
+    x // simply return the first parameter
 }
