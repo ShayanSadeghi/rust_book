@@ -2,6 +2,22 @@ struct ImportantEx<'a> {
     part: &'a str,
 }
 
+impl<'a> ImportantEx<'a> {
+    fn level(&self) -> i32 {
+        // the return value is not reference to anything, so we don't need to define lifetime
+        3
+    }
+}
+
+impl<'a> ImportantEx<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        // lifetime elision rule: because one of parameters is &self, the return type gets the
+        // ...lifetime of &self.
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
 fn main() {
     let string1 = String::from("abcd");
     {
@@ -22,6 +38,10 @@ fn main() {
     let x = ImportantEx {
         part: first_sentence,
     };
+    println!("x part is {}", x.part);
+
+    println!("method level returns:\t {}", x.level());
+    x.announce_and_return_part("Check amper");
 }
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
