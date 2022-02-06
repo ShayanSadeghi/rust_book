@@ -10,6 +10,14 @@ impl Rectangle {
     }
 }
 
+fn add_two(a: i32) -> i32 {
+    a + 2
+}
+
+fn multi_two(a: i32) -> i32 {
+    a * 3
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -41,5 +49,17 @@ mod tests {
         };
 
         assert!(!smaller.can_hold(&larger))
+    }
+
+    #[test]
+    fn is_add_two() {
+        let res = add_two(2);
+        assert_eq!(res, 4) // the order of res and 4 is not important
+    }
+
+    #[test]
+    fn is_multi_two() {
+        let res = multi_two(5);
+        assert_eq!(10, res) // failed because we define the bug in multi_two function
     }
 }
