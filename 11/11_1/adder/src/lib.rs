@@ -51,6 +51,8 @@ mod tests {
         assert!(!smaller.can_hold(&larger))
     }
 
+    // it is possible to assert_eq!(left, right) to check left == right and
+    // assert_ne!(left, right) to check left != right
     #[test]
     fn is_add_two() {
         let res = add_two(2);
