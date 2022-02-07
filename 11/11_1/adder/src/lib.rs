@@ -98,4 +98,13 @@ mod tests {
     fn greeter_than_100() {
         Guess::new(200);
     }
+
+    #[test]
+    fn it_works() -> Result<(), String> {
+        if 2 + 2 == 4 {
+            Ok(()) // instead of assert or asserteq we return Ok
+        } else {
+            Err(String::from("something going wrong!")) // we can't use should_panic but we can return Err
+        }
+    }
 }
