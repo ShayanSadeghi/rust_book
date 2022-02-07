@@ -22,6 +22,19 @@ fn greeting(name: &str) -> String {
     format!("Hallo {}", name)
 }
 
+pub struct Guess {
+    value: i32,
+}
+
+impl Guess {
+    pub fn new(value: i32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {}", value);
+        }
+        Guess { value }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -71,12 +84,18 @@ mod tests {
 
     #[test]
     fn greeting_contains_name() {
-        let res = greeting("Tom");
+        let res = greeting("Schayan");
         // all values after first param in assert macro and second parameters assert_eq and assert_ne are message
         assert!(
             res.contains("Schayan"),
             "Greeting did not contain name, value is {}",
             res
         );
+    }
+
+    #[test]
+    #[should_panic(expected = "Guess value must be between 1 and 100")] // expected part is optional and we define it to precisely refer to a correct panic instead of any other panic
+    fn greeter_than_100() {
+        Guess::new(200);
     }
 }
