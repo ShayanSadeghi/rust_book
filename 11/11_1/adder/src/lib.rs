@@ -15,7 +15,11 @@ fn add_two(a: i32) -> i32 {
 }
 
 fn multi_two(a: i32) -> i32 {
-    a * 3
+    a * 2
+}
+
+fn greeting(name: &str) -> String {
+    format!("Hallo {}", name)
 }
 
 #[cfg(test)]
@@ -63,5 +67,16 @@ mod tests {
     fn is_multi_two() {
         let res = multi_two(5);
         assert_eq!(10, res) // failed because we define the bug in multi_two function
+    }
+
+    #[test]
+    fn greeting_contains_name() {
+        let res = greeting("Tom");
+        // all values after first param in assert macro and second parameters assert_eq and assert_ne are message
+        assert!(
+            res.contains("Schayan"),
+            "Greeting did not contain name, value is {}",
+            res
+        );
     }
 }
