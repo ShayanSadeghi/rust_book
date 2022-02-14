@@ -1,4 +1,5 @@
 use std::env;
+use std::error::Error;
 use std::fs;
 use std::process;
 
@@ -17,6 +18,15 @@ impl Config {
         Ok(Config { query, filename })
     }
 }
+
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    //we just use run function for its side effect (Error)
+    let contents = fs::read_to_string(config.filename)?;
+
+    println!("With text\n{}", contents);
+    Ok(())
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = Config::new(&args).unwrap_or_else(|err| {
@@ -24,7 +34,8 @@ fn main() {
         process::exit(1);
     });
 
-    let contents =
-        fs::read_to_string(config.filename).expect("Something went wrong during file reading");
-    println!("Text is:\n{}", contents)
+    if let Err(e) = run(config) {
+        println!("Application Error: {}", e);
+        process::exit(1);
+    }
 }
