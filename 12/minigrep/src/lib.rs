@@ -26,7 +26,15 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    vec![]
+    let mut results = Vec::new(); // TDD step 2: write and modify code to pass the test
+
+    for line in contents.lines() {
+        if line.contains(query) {
+            results.push(line);
+        }
+    }
+
+    results
 }
 
 #[cfg(test)]
@@ -41,6 +49,6 @@ Rust:
 safe, fast, productive.
 Pick three.";
 
-        assert_eq!(vec!["safe, fast, productive"], search(query, contents)); //TDD step 1: write a test that fails and check fail reason is what we design
+        assert_eq!(vec!["safe, fast, productive."], search(query, contents)); //TDD step 1: write a test that fails and check fail reason is what we design
     }
 }
