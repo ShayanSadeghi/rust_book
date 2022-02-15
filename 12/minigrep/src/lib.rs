@@ -22,6 +22,10 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     //we just use run function for its side effect (Error)
     let contents = fs::read_to_string(config.filename)?;
 
+    for line in search(&config.query, &contents) {
+        //TDD step 3: refactor the code and make sure tests continue to pass ("Here by testing real situations")
+        println!("{}", line);
+    }
     Ok(())
 }
 
