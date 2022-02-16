@@ -41,6 +41,10 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     results
 }
 
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    vec![] // fails the test
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -51,8 +55,24 @@ mod tests {
         let contents = "\
 Rust:
 safe, fast, productive.
-Pick three.";
+Pick three.
+Duct tape."; // add this line with capital D to ensure we don't break case-sensitive searching functionality.
 
         assert_eq!(vec!["safe, fast, productive."], search(query, contents)); //TDD step 1: write a test that fails and check fail reason is what we design
+    }
+
+    #[test]
+    fn case_insensitive() {
+        let query = "rUsT";
+        let contents = "\
+        Rust:
+safe, fast, productive.
+Pick three.
+Trust me.";
+
+        assert_eq!(
+            vec!["Rust:", "Trust me."],
+            search_case_insensitive(query, contents)
+        );
     }
 }
