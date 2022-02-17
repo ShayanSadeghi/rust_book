@@ -16,7 +16,6 @@ impl Config {
         let query = args[1].clone();
         let filename = args[2].clone();
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err(); // the value is not important, it's just important that if it is set or not
-        println!("{}", case_sensitive);
         Ok(Config {
             query,
             filename,
