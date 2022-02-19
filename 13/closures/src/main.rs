@@ -1,24 +1,23 @@
 use std::thread;
 use std::time::Duration;
 
-fn simulated_expensive_calculation(intensity: u32) -> u32 {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    intensity
-}
-
 fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_result = simulated_expensive_calculation(intensity);
+    let expensive_closure = |num| {
+        println!("calculation slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
 
     if intensity < 25 {
-        println!("Today, Do {} pushups!", expensive_result);
-        println!("Then, Do {} situps", expensive_result);
+        let expensive_res = expensive_closure(intensity);
+        println!("Today, Do {} pushups!", expensive_res);
+        println!("Then, Do {} situps", expensive_res);
     } else {
         if random_number == 3 {
-            // if we go here, we don't need to wait for expensive_result funtion, but we still wait
+            // now we don't call closure because we don't need that here
             println!("Take a break today! Remember to stay hydrated.");
         } else {
-            println!("Today, run for {} minutes", expensive_result)
+            println!("Today, run for {} minutes", expensive_closure(intensity))
         }
     }
 }
