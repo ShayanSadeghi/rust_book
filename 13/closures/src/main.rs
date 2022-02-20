@@ -59,4 +59,11 @@ fn main() {
     let simulated_random_number = 7;
 
     generate_workout(simulated_user_specified_value, simulated_random_number);
+
+    let x = 4;
+    let equal_to_x = |z| z == x; // simple closure. it has access to x, which we won't have access to if we use a function
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
 }
