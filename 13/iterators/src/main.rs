@@ -13,6 +13,7 @@ fn main() {
     println!("Total: {}", total);
 
     let v3: Vec<i32> = vec![1, 2, 3];
-
-    v3.iter().map(|x| x + 1); // this is not working because iterators are lazy
+    let outer_val = 4;
+    let v4: Vec<_> = v3.iter().map(|x| x * outer_val).collect(); // because we use a clouser in map; we have access to outer scope variables too
+    println!("v3 plus 1 is: {:?}", v4)
 }
