@@ -79,4 +79,15 @@ mod tests {
         assert_eq!(counter.next(), Some(5));
         assert_eq!(counter.next(), None);
     }
+
+    #[test]
+    fn using_other_iterator_trait_methods() {
+        let sum: u32 = Counter::new() // create a new Counter...
+            .zip(Counter::new().skip(1)) // zip it to other Counter which started from 2 (check the 'next' method defenition)
+            .map(|(a, b)| a * b) // clouser that multiplied each value in two counter instances
+            .filter(|x| x % 3 == 0) // filter values (a*b results) which are divisible by 3
+            .sum(); // calculate the summation of filtered values
+                    //
+        assert_eq!(18, sum);
+    }
 }
