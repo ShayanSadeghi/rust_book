@@ -4,8 +4,8 @@ use std::process;
 use minigrep::Config;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    // env::args() returns. we used to collecting this iterator into a vector
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
         eprintln!("Problem passing arguments: {}", err); // when we use eprintln! instead of println!, on the case of error rust returns and stderr instead of simple stdout,
                                                          // so if we try to put the result into a
                                                          // file, and there is and error, stderr
