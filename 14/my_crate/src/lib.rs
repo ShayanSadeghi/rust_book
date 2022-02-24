@@ -1,4 +1,13 @@
+// commenting to define the purpose of the "my_crate" not just a function
+
+//! # My Crate
+//!
+//! `my_crate` is a collection of utilities to make performing certain calculations.
+//! it is just a test to describe a whole crate
+
 // running cargo doc create html documentation from section using triple slash("///")
+// the following command is just for the function that came after the doc-comments
+
 /// Adds one to the number given.
 ///
 /// # Examples
