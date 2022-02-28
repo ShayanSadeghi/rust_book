@@ -33,4 +33,12 @@ fn main() {
 
     assert_eq!(5, x2);
     assert_eq!(5, *y2); //rust will run *(y2.deref())
+
+    let m = MyBox::new(String::from("Shayan"));
+    hello(&m); //By deref coercion, Rust will analyze the types and use Deref::deref as many time as necessary to get a reference to match the parameter's type
+               //In this example: MyBox(String) -> String -> str
+}
+
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
 }
