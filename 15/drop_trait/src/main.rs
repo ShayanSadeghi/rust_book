@@ -16,4 +16,7 @@ fn main() {
         data: String::from("other stuff"),
     };
     println!("CustomSmartPointers created.");
+    // we cannot call drop function directly (c.drop() will cause an error)
+    // to do an early drop we should use std::mem::drop ...
+    // this function is in the prelude so we just need run (drop(c)) to do an early drop
 }
