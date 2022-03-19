@@ -4,6 +4,7 @@ use std::time::Duration;
 
 fn main() {
     let (tx, rx) = mpsc::channel(); //create a new channel --  transmitter(tx), receiver(rx)
+    let tx1 = tx.clone(); // make another transmitter (multiple producer)
 
     thread::spawn(move || {
         // create a new thread
@@ -16,6 +17,21 @@ fn main() {
 
         for val in vals {
             tx.send(val).unwrap(); // send method returns a Result<T, E>
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    thread::spawn(move || {
+        // create another thread
+        let vals = vec![
+            String::from("more"),
+            String::from("messages"),
+            String::from("for"),
+            String::from("you"),
+        ];
+
+        for val in vals {
+            tx1.send(val).unwrap(); // send method returns a Result<T, E>
             thread::sleep(Duration::from_secs(1));
         }
     });
