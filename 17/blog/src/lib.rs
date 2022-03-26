@@ -10,6 +10,12 @@ impl Post {
             content: String::new(),
         }
     }
+    pub fn add_text(&mut self, text: &str) {
+        self.content.push_str(text); // adding text to content does not related to the 'state' of the Post
+    }
+    pub fn content(&self) -> &str {
+        "" // it's a placeholder
+    }
 }
 
 trait State {}
