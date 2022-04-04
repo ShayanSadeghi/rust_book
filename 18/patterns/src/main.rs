@@ -42,4 +42,13 @@ fn main() {
     let x = 5;
     let (x, y, z) = (1, 2, 3); // it's also a pattern
                                //function parameters are patterns too
+
+    // refutable and irrefutable
+    let some_option_value: Option<i32> = None;
+    // the following code cause a compile time  error
+    // let Some(x) = some_option_value; // "let" only accept irrefutable patterns, but "Some(x)" can be refutable. ex. have None value
+    if let Some(x) = some_option_value {
+        // if "some_option_value" be "None", Rust will skip this section and continue code. It is a refutable pattern
+        println!("{}", x);
+    }
 }
