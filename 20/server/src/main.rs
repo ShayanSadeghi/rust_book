@@ -14,16 +14,22 @@ fn main() {
 
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024]; // size 1024 size
-
     stream.read(&mut buffer).unwrap(); // read bytes from TcpStream and put them in the buffer
-                                       //    Printing Request
-    println!("Requset: {}", String::from_utf8_lossy(&buffer[..])); // convert the bytes in the buffer and print that string
 
-    // Make and send a response
-    // read the HTML file
-    let contents = fs::read_to_string("index.html").unwrap();
+    // the header will be like this if it request "/" URI
+    let get = b"GET / HTTP/1.1\r\n";
+
+    let (status_line, filename) = if buffer.starts_with(get) {
+        ("HTTP/1.1 200 OK", "index.html")
+    } else {
+        ("HTTP/1.1 404 NOT", "404.html")
+    };
+
+    let contents = fs::read_to_string(filename).unwrap();
+
     let response = format!(
-        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\n\r\n{}",
+        "{}\r\nContent-Length: {}\r\n\r\n{}",
+        status_line,
         contents.len(),
         contents
     );
