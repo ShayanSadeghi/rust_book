@@ -1,3 +1,4 @@
+use std::fs;
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
@@ -15,11 +16,17 @@ fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024]; // size 1024 size
 
     stream.read(&mut buffer).unwrap(); // read bytes from TcpStream and put them in the buffer
-                                       // Printing Request
+                                       //    Printing Request
     println!("Requset: {}", String::from_utf8_lossy(&buffer[..])); // convert the bytes in the buffer and print that string
 
     // Make and send a response
-    let response = "HTTP/1.1 200 OK\r\n\r\n";
+    // read the HTML file
+    let contents = fs::read_to_string("index.html").unwrap();
+    let response = format!(
+        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\n\r\n{}",
+        contents.len(),
+        contents
+    );
 
     stream.write(response.as_bytes()).unwrap(); // convert response to bytes
     stream.flush().unwrap(); // "flush" will wait and prevent the program from continuing until all the bytes are written to the connection
