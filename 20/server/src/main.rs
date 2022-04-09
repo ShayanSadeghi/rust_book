@@ -12,10 +12,15 @@ fn main() {
 }
 
 fn handle_connection(mut stream: TcpStream) {
-    //Reading the request
     let mut buffer = [0; 1024]; // size 1024 size
 
     stream.read(&mut buffer).unwrap(); // read bytes from TcpStream and put them in the buffer
-
+                                       // Printing Request
     println!("Requset: {}", String::from_utf8_lossy(&buffer[..])); // convert the bytes in the buffer and print that string
+
+    // Make and send a response
+    let response = "HTTP/1.1 200 OK\r\n\r\n";
+
+    stream.write(response.as_bytes()).unwrap(); // convert response to bytes
+    stream.flush().unwrap(); // "flush" will wait and prevent the program from continuing until all the bytes are written to the connection
 }
