@@ -10,7 +10,11 @@ fn main() {
                                                                  // "TcpListener::bind" returns a "Result<T, E>", so we use "unwrap" to stop program on error
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-        handle_connection(stream);
+
+        thread::spawn(|| {
+            // create new thread for each request. WARNING: It's a bad idea. This may cause DoS
+            handle_connection(stream);
+        });
     }
 }
 
