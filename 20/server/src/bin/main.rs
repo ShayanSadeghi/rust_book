@@ -5,13 +5,16 @@ use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
 
+use server::ThreadPool;
+
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap(); // binding (connecting) to a port to listen
                                                                  // "TcpListener::bind" returns a "Result<T, E>", so we use "unwrap" to stop program on error
+    let pool = ThreadPool::new(4); // create a new thread pool with 4 threads
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        thread::spawn(|| {
+        pool.execute(|| {
             // create new thread for each request. WARNING: It's a bad idea. This may cause DoS
             handle_connection(stream);
         });
