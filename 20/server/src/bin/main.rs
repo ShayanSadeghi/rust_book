@@ -11,7 +11,8 @@ fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap(); // binding (connecting) to a port to listen
                                                                  // "TcpListener::bind" returns a "Result<T, E>", so we use "unwrap" to stop program on error
     let pool = ThreadPool::new(4); // create a new thread pool with 4 threads
-    for stream in listener.incoming() {
+    for stream in listener.incoming().take(2) {
+        // we add ".take(2)" just for taking two job and then shutdown the server
         let stream = stream.unwrap();
 
         pool.execute(|| {
@@ -19,6 +20,8 @@ fn main() {
             handle_connection(stream);
         });
     }
+
+    println!("Shutting down.")
 }
 
 fn handle_connection(mut stream: TcpStream) {
